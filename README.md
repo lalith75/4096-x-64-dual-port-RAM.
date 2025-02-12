@@ -1,60 +1,89 @@
-# 4096-x-64-dual-port-RAM
+# 4096 x 64 Dual-Port RAM
 
-Dual port RAM can be written and read simultaneously. This special type of RAM has two unidirectional data ports an input port for writing data and an output port for reading data. Each port has its own data and address buses. The write port has a signal called WRITE to allow writing the data. The read port has a signal called READ to enable the data output. Both reading and writing data occur on the rising clock edge.
-The write driver gets 3 signals: write:0/1, wr_address and data_in.
-The read driver gets 2 signals: read and rd_address
-The data is received and transferred through modules with the help of modules parameterised to class ram_trans.
-The reference model samples the data from read monitor and write monitor to reference the data with scoreboard.
-The scoreboard has coverpoints to check the coverage of all the signals.
+A dual-port RAM allows simultaneous read and write operations. This specialized type of RAM features two unidirectional data ports: an input port for writing data and an output port for reading data. Each port has its own dedicated data and address buses. The write port includes a `WRITE` signal to enable data writing, while the read port has a `READ` signal to enable data output. Both read and write operations occur on the rising edge of the clock.
 
-****Verification Plan:****
+## Design Overview
 
-**Features:**
-**Reset** 
-**Read (To Avoid)**
-Random Read - Reading the empty location 
-Random Read - Reading the same locations consecutively 
-**Write (To Avoid)**
-Random Write - Writing into the same locations consecutively 
-**Read+Write (To Avoid)**
-Read+Write - on the same memory location
+- **Write Driver**: Receives three signals:
+  - `write`: 0/1 (write enable)
+  - `wr_address`: Write address
+  - `data_in`: Data to be written
 
-**Strategies:**
-Reset 
-Write zeros into the memory 
-**Read** 
-Random read - reading the valid data 
-SB: Compare the data only during read operation 
-Receiver: Collect the read address and data out and create transaction 
-Random Read - Reading the empty location 
-SB: Message: NO random data written 
-Random Read - Reading the same locations consecutively 
-**Write** 
-Random Write - Writing into the same locations consecutively 
-**Memory Model**
-Model: A reference model for memory is implemented using associative array 
-**Read+Write**
-Read+Write - on the same memory location 
-Not allowed - Define a constraint in Transaction
+- **Read Driver**: Receives two signals:
+  - `read`: Read enable
+  - `rd_address`: Read address
 
-**Transaction** 
-**Base Class**- Random: Read and Write Addresses, Input Data, Output data, Read and Write control signals 
-**Extended Classes:**
-TC1: Input data & Address - Weighted Random, 
-TC2: Address & Data - Additional constraints, 
-TC3: Directed 
-**Transactors**
-**Generator** - generates random transaction 
-**Driver** - Drives address, data_in and control signals for Read and Write operations 
-**Monitor** - Collects the read address and data out and composes received transaction 
-**SB** - Compares the transactions and generates coverage 
-**Coverage Model - Write**
-WR ADD: [MIN, MID, MAX] 
-DATA: [MIN, MID, MAX] 
-WR 
-WRITEXADDXDATA 
-**Coverage Model - Read**
-RD ADD: [MIN, MID, MAX] 
-DATA: [MIN, MID, MAX] 
-RD 
-READXADDXDATA
+Data is transferred between modules using parameterized classes (`ram_trans`). The reference model samples data from the read and write monitors to compare it with the scoreboard. The scoreboard includes coverpoints to ensure comprehensive signal coverage.
+
+---
+
+## Verification Plan
+
+### Features
+
+- **Reset**
+- **Read (To Avoid)**:
+  - Random Read: Reading from an empty location
+  - Random Read: Reading the same location consecutively
+- **Write (To Avoid)**:
+  - Random Write: Writing to the same location consecutively
+- **Read + Write (To Avoid)**:
+  - Simultaneous Read and Write on the same memory location
+
+### Strategies
+
+- **Reset**:
+  - Write zeros into the memory.
+- **Read**:
+  - Random Read: Read valid data.
+    - Scoreboard (SB): Compare data only during read operations.
+    - Receiver: Collect read address and data output, then create a transaction.
+  - Random Read: Reading from an empty location.
+    - SB: Display message: "No random data written."
+  - Random Read: Reading the same location consecutively.
+- **Write**:
+  - Random Write: Writing to the same location consecutively.
+- **Memory Model**:
+  - A reference model for memory is implemented using an associative array.
+- **Read + Write**:
+  - Simultaneous Read and Write on the same memory location is not allowed. Define constraints in the transaction.
+
+---
+
+## Transaction Model
+
+### Base Class
+- Randomizes:
+  - Read and Write addresses
+  - Input and Output data
+  - Read and Write control signals
+
+### Extended Classes
+- **TC1**: Weighted randomization for input data and address.
+- **TC2**: Additional constraints for address and data.
+- **TC3**: Directed test cases.
+
+---
+
+## Transactors
+
+- **Generator**: Generates random transactions.
+- **Driver**: Drives address, `data_in`, and control signals for read and write operations.
+- **Monitor**: Collects read address and data output, then composes the received transaction.
+- **Scoreboard (SB)**: Compares transactions and generates coverage.
+
+---
+
+## Coverage Model
+
+### Write Coverage
+- **WR ADD**: [MIN, MID, MAX]
+- **DATA**: [MIN, MID, MAX]
+- **WR**
+- **WRITE x ADD x DATA**
+
+### Read Coverage
+- **RD ADD**: [MIN, MID, MAX]
+- **DATA**: [MIN, MID, MAX]
+- **RD**
+- **READ x ADD x DATA**
