@@ -38,12 +38,12 @@ Read+Write - on the same memory location
 Not allowed - Define a constraint in Transaction
 
 **Transaction** 
-**Base Class **- Random: Read and Write Addresses, Input Data, Output data, Read and Write control signals 
-**Extended Classes: **
+**Base Class**- Random: Read and Write Addresses, Input Data, Output data, Read and Write control signals 
+**Extended Classes:**
 TC1: Input data & Address - Weighted Random, 
 TC2: Address & Data - Additional constraints, 
 TC3: Directed 
-**Transactors **
+**Transactors\n**
 **Generator** - generates random transaction 
 **Driver** - Drives address, data_in and control signals for Read and Write operations 
 **Monitor** - Collects the read address and data out and composes received transaction 
