@@ -16,8 +16,8 @@ Random Read - Reading the empty location
 Random Read - Reading the same locations consecutively 
 **Write (To Avoid)**
 Random Write - Writing into the same locations consecutively 
-**Read+Write (To Avoid)
-**Read+Write - on the same memory location
+**Read+Write (To Avoid)**
+Read+Write - on the same memory location
 
 **Strategies:**
 Reset 
@@ -33,7 +33,7 @@ Random Read - Reading the same locations consecutively
 Random Write - Writing into the same locations consecutively 
 **Memory Model**
 Model: A reference model for memory is implemented using associative array 
-**Read+Write **
+**Read+Write**
 Read+Write - on the same memory location 
 Not allowed - Define a constraint in Transaction
 
@@ -43,7 +43,7 @@ Not allowed - Define a constraint in Transaction
 TC1: Input data & Address - Weighted Random, 
 TC2: Address & Data - Additional constraints, 
 TC3: Directed 
-**Transactors\n**
+**Transactors**
 **Generator** - generates random transaction 
 **Driver** - Drives address, data_in and control signals for Read and Write operations 
 **Monitor** - Collects the read address and data out and composes received transaction 
