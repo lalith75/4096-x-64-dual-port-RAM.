@@ -88,3 +88,4 @@ Data is transferred between modules using parameterized classes (`ram_trans`). T
 - **DATA**: [MIN, MID, MAX]
 - **RD**
 - **READ x ADD x DATA**
+![image](https://github.com/user-attachments/assets/7bd47624-d726-41c8-98d6-42c0912bcc95)
