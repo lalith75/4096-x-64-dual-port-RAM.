@@ -73,6 +73,8 @@ Data is transferred between modules using parameterized classes (`ram_trans`). T
   - **Note**: In the testbench, it takes **2 clock cycles** for the monitor to sample the driven signals (read and write) from the driver.
 - **Scoreboard (SB)**: Compares transactions and generates coverage.
 
+![image](https://github.com/user-attachments/assets/5a26ce2c-647b-4658-bdff-f81583e1710b)
+
 ---
 
 ## Coverage Model
