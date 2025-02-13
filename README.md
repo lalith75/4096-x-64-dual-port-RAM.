@@ -88,4 +88,15 @@ Data is transferred between modules using parameterized classes (`ram_trans`). T
 - **DATA**: [MIN, MID, MAX]
 - **RD**
 - **READ x ADD x DATA**
-![image](https://github.com/user-attachments/assets/7bd47624-d726-41c8-98d6-42c0912bcc95)
+
+---
+
+## Implementation and Results
+
+This project was implemented and verified using **Synopsys Verdi**. The functional coverage results for the test cases are as follows:
+- **Test Case 1**: 78% functional coverage achieved.
+- **Test Case 2**: 90% functional coverage achieved.
+
+---
+
+This project implements a 4096 x 64 dual-port RAM with a comprehensive verification plan to ensure functionality and coverage. The testbench is designed such that the monitor requires **2 clock cycles** to sample the driven signals (read and write) from the driver.
