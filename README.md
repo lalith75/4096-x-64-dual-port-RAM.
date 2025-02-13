@@ -70,6 +70,7 @@ Data is transferred between modules using parameterized classes (`ram_trans`). T
 - **Generator**: Generates random transactions.
 - **Driver**: Drives address, `data_in`, and control signals for read and write operations.
 - **Monitor**: Collects read address and data output, then composes the received transaction.
+  - **Note**: In the testbench, it takes **2 clock cycles** for the monitor to sample the driven signals (read and write) from the driver.
 - **Scoreboard (SB)**: Compares transactions and generates coverage.
 
 ---
